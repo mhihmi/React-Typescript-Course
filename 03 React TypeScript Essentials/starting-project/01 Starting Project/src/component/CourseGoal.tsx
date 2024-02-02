@@ -7,21 +7,25 @@ import { type PropsWithChildren } from "react";
 // With children Prop 3.30/31/32
 // interface CourseGoalProps { title: string; children: ReactNode }
 // With children Alternative
-type CourseGoalProps = PropsWithChildren<{title: string}>
+type CourseGoalProps = PropsWithChildren<{
+  id: number;
+  title: string;
+  onDelete: (id: number) => void;
+}>
 
 // Without children Prop (replace children by description in jsx)
 // interface CourseGoalProps { title: string; description: string }
 // OR
 // type CourseGoalProps = { title: string; description: string }
 
-export default function CourseGoal({ title, children }: CourseGoalProps) {
-    return <article>
-      <div>
-            <h2>{title}</h2>
-            {children}
-            {/* <p>{description}</p> */}
-        </div>
-        <button>Delete</button>
+export default function CourseGoal({ id, title, children, onDelete }: CourseGoalProps) {
+  return <article>
+    <div>
+      <h2>{title}</h2>
+      {children}
+      {/* <p>{description}</p> */}
+    </div>
+    <button onClick={() => onDelete(id)}>Delete</button>
   </article>
 }
 
@@ -36,4 +40,6 @@ export default function CourseGoal({ title, children }: CourseGoalProps) {
 //         <button>Delete</button>
 //   </article>
 // }
+
+// 3.34
 
